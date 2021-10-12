@@ -1,0 +1,7 @@
+django  # framework web
+# django-allauth  # forms
+django-crispy-forms # style forms
+django-environ  # .env read
+psycopg2-binary # postgresql connect
+pytest  # tests
+Pillow  # field image
