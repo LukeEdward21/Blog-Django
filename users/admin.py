@@ -15,3 +15,9 @@ class UserAdmin(auth_admin.UserAdmin):
         ("Dados pessoais", {"fields": ("image", )}),
         ("Permissões", {"fields": ("is_writer", )}),
     )
+
+    add_fieldsets = auth_admin.UserAdmin.add_fieldsets + (
+        ("Informações pessoais", {"fields": ("first_name", "last_name", "email", )}),
+        ("Perfil do usuário", {"fields": ("image", )}),
+        ("Permissões", {"fields": ("is_writer", )}),
+    )

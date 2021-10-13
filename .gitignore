@@ -140,3 +140,9 @@ cython_debug/
 # editors
 .vscode/
 .idea/
+
+# images
+media/thumbnails/*
+media/users/*
+
+static/images/*

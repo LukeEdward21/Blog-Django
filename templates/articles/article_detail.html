@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block jumbotron %}
+    <img src="/media/{{article.thumbnail}}" class="rounded mx-auto d-block img-fluid" alt="Responsive image">
+{% endblock %}
+
+{% block content %}
+<div class="blog-post">
+            <h2 class="blog-post-title">{{article.title}}</h2>
+            <p class="blog-post-meta">Criado em {{article.created}} por {{article.author}}</p>
+            {% if article.created != article.updated %}
+            <p class="blog-post-meta">Atualizado em {{article.updated}} por {{article.author}}</p>
+            {% endif %}
+
+            <p><em>{{article.resume}}</em></p>
+            <hr>
+            <p>
+            {{article.body}}
+            </p>
+          </div>
+{% endblock %}
