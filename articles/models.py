@@ -1,14 +1,26 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from uuid import uuid4
+import os
 
-from django.conf import settings
+
+def path_and_rename(instance, filename):
+    upload_to = 'thumbnails/'
+    ext = filename.split('.')[-1]
+    
+    if instance.pk:
+        filename = '{}.{}'.format(instance.pk, ext)
+    else:
+        filename = '{}.{}'.format(uuid4().hex, ext)
+    return os.path.join(upload_to, filename)
 
 
 class Article(models.Model):
     slug = models.SlugField(max_length=150, unique=True, verbose_name='URL')
     title = models.CharField('Título', max_length=150, unique=True)
-    thumbnail = models.ImageField('Thumbnail', upload_to='thumbnails/', blank=True)
+    thumbnail = models.ImageField('Thumbnail', upload_to=path_and_rename, blank=True)
     resume = models.CharField('Resumo', max_length=150)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
@@ -28,3 +40,4 @@ class Article(models.Model):
     
     def get_absolute_url(self):
         return reverse("articles:detail", kwargs={"slug": self.slug})
+    
