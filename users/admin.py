@@ -12,12 +12,14 @@ class UserAdmin(auth_admin.UserAdmin):
     model = User
 
     fieldsets = auth_admin.UserAdmin.fieldsets + (
-        ("Dados pessoais", {"fields": ("image", )}),
+        ("Dados pessoais", {"fields": ("image", "birth_date", "gender", )}),
         ("Permissões", {"fields": ("is_writer", )}),
     )
 
     add_fieldsets = auth_admin.UserAdmin.add_fieldsets + (
-        ("Informações pessoais", {"fields": ("first_name", "last_name", "email", )}),
+        ("Informações pessoais", {"fields": ("first_name", "last_name", "email", "birth_date", "gender")}),
         ("Perfil do usuário", {"fields": ("image", )}),
         ("Permissões", {"fields": ("is_writer", )}),
     )
+
+    readonly_fields = ['birth_date']

@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # 3rd party
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     # local apps
     'users.apps.UsersConfig',
     'articles.apps.ArticlesConfig',
@@ -140,3 +145,17 @@ MEDIA_URL = '/media/'
 
 # User Model
 AUTH_USER_MODEL = "users.User"
+
+# Django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_FORMS = {'signup': 'users.forms.SimpleSignupForm'}
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # custom this to your project
+# ACCOUNT_EMAIL_VERIFICATION = "none"
