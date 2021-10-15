@@ -49,7 +49,7 @@ class SimpleSignupForm(SignupForm):
         self.fields['password1'].label = ""
         self.fields['password2'].label = ""
     
-    field_order = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'birth_date', 'gender']
+    field_order = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'birth_date', 'gender']
 
 
 class SimpleLoginForm(LoginForm):
