@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
     # local apps
     'users.apps.UsersConfig',
     'articles.apps.ArticlesConfig',
@@ -154,8 +155,14 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_FORMS = {'signup': 'users.forms.SimpleSignupForm'}
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.SimpleSignupForm',
+    'login': 'users.forms.SimpleLoginForm',
+    }
 ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # custom this to your project
 # ACCOUNT_EMAIL_VERIFICATION = "none"
+
+# crispy-forms
+CRISPY_TEMPLATE_PACK = "bootstrap4"
