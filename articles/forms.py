@@ -4,7 +4,7 @@ from .models import Article
 
 
 class WriteForm(forms.ModelForm):
-    
+    # author = forms.ModelChoiceField(choices)
     class Meta:
         model = Article
         fields = (
@@ -13,5 +13,5 @@ class WriteForm(forms.ModelForm):
             'thumbnail', 
             'resume', 
             'body', 
-            'author'
+            # 'author'
             ) 
