@@ -14,6 +14,11 @@
 
 {% block content %}
     <div class="row mb-2">
+    {% if user.is_authenticated %}
+      {% if user.is_writer%}
+      <a href="{% url 'articles:write' %}">Escrever</a>
+      {% endif %}
+    {% endif %}
     {% for article in article_list %}
         <div class="col-md-6">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">

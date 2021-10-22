@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block title %}Escrever novo artigo{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if user.is_writer %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
+    </form>
+    <script type="text/javascript">
+        var slug = document.getElementById('id_slug')
+        var title = document.getElementById('id_title')
+        title.onchange = function() {
+            var slug_spaceless = title.value.replace(/\s/g, '-')
+            var slug_normalized = slug_spaceless.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            slug.value = slug_normalized.toLowerCase()
+        }
+    </script>        
+    {% endif %}
+    
+{% endblock %}
