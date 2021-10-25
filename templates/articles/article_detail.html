@@ -3,21 +3,33 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block jumbotron %}
+  {% if article.thumbnail %}
     <img src="/media/{{article.thumbnail}}" class="rounded mx-auto d-block img-fluid" alt="Responsive image">
+    <p>Imagem: <em>{{article.thumbnail_credits}}</em></p>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="blog-post">
+
+          <div class="blog-post">
             <h2 class="blog-post-title">{{article.title}}</h2>
             <p class="blog-post-meta">Criado em {{article.created}} por {{article.author}}</p>
             {% if article.created != article.updated %}
-            <p class="blog-post-meta">Atualizado em {{article.updated}} por {{article.author}}</p>
+              <p class="blog-post-meta">Atualizado em {{article.updated}} por {{article.author}}</p>
             {% endif %}
 
             <p><em>{{article.resume}}</em></p>
             <hr>
+            {% if user.is_authenticated %}
             <p>
             {{article.body}}
             </p>
+            {% elif not article.is_exclusive %}
+            <p>
+            {{article.body}}
+            </p>
+            {% else %}
+            <p>Artigo Exclusivo para assinantes.</p>
+            {% endif %}
           </div>
 {% endblock %}

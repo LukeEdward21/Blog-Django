@@ -18,9 +18,20 @@ def path_and_rename(instance, filename):
 
 
 class Article(models.Model):
+    TYPE_CHOICES = (
+        ('Games', 'Jogos'),
+        ('Movies', 'Filmes'),
+        ('Series', 'Séries'),
+        ('Books', 'Livros'),
+    )
+
+
     slug = models.SlugField(max_length=150, unique=True, verbose_name='URL')
     title = models.CharField('Título', max_length=150, unique=True)
     thumbnail = models.ImageField('Thumbnail', upload_to=path_and_rename, blank=True)
+    thumbnail_credits = models.CharField('Autor da imagem', max_length=150, blank=True)
+    type = models.CharField('Assunto', max_length=150, choices=TYPE_CHOICES)
+
     resume = models.CharField('Resumo', max_length=150)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
@@ -31,6 +42,8 @@ class Article(models.Model):
     body = models.TextField('Texto')
     created = models.DateTimeField('Criado', auto_now_add=True)
     updated = models.DateTimeField('Atualizado', auto_now=True)
+    # added fields
+    is_exclusive = models.BooleanField('Exclusivo', default=False)
 
     class Meta:
         ordering = ("-created",)

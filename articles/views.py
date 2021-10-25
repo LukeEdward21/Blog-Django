@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -18,14 +19,21 @@ class ArticleFormView(FormView):
     model = Article
     template_name = 'articles/write.html'
     success_url = '/'
+    success_message = ''
     form_class = WriteForm
 
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.author = self.request.user
-        obj.save()
-        return super().form_valid(form)
+        try:
+            obj = form.save(commit=False)
+            obj.author = self.request.user
+            obj.save()
+            messages.success(self.request, "Artigo salvo com sucesso!")
+            return super().form_valid(form)
+        except Exception as e:
+            messages.warning(self.request, "Problema ao salvar o artigo!")
+            return super(ArticleFormView, self)
+        
     
     def get(self, request, *args, **kwargs):
         if not request.user.is_writer:

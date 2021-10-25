@@ -10,8 +10,11 @@ class WriteForm(forms.ModelForm):
         fields = (
             'slug', 
             'title', 
-            'thumbnail', 
+            'thumbnail',
+            'thumbnail_credits',
+            'type',
             'resume', 
             'body', 
             # 'author'
+            'is_exclusive',
             ) 
