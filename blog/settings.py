@@ -162,8 +162,9 @@ ACCOUNT_FORMS = {
     }
 ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # custom this to your project
-# ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # crispy-forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"

@@ -35,7 +35,9 @@ class SimpleSignupForm(SignupForm):
 
         user.birth_date = self.cleaned_data['birth_date']
         user.gender = self.cleaned_data['gender']
+        # user.is_active = False
         user.save()
+        
         return user
     
     def __init__(self, *args, **kwargs):
@@ -57,3 +59,4 @@ class SimpleLoginForm(LoginForm):
         super(SimpleLoginForm, self).__init__(*args, **kwargs)
         self.fields['login'].label = ""
         self.fields['password'].label = ""
+
