@@ -9,10 +9,10 @@ from .models import Article
 
 
 @method_decorator(login_required, name='dispatch')
-class ArticleFormView(CreateView):
+class ArticleCreateView(CreateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArticleFormView, self).dispatch(*args, **kwargs)
+        return super(ArticleCreateView, self).dispatch(*args, **kwargs)
     
     model = Article
     template_name = 'articles/write.html'
@@ -30,13 +30,13 @@ class ArticleFormView(CreateView):
             return super().form_valid(form)
         except Exception as e:
             messages.warning(self.request, "Problema ao salvar o artigo!")
-            return super(ArticleFormView, self)
+            return super(ArticleCreateView, self)
         
     
     def get(self, request, *args, **kwargs):
         if not request.user.is_writer:
             raise Http404("Página não existe!")
-        return super(ArticleFormView, self).get(request, *args, **kwargs)
+        return super(ArticleCreateView, self).get(request, *args, **kwargs)
 
 
 class ArticleListView(ListView):
@@ -56,16 +56,8 @@ class UpdateArticleView(UpdateView):
     
     model = Article
     template_name = 'articles/edit.html'
-    fields = [
-        'slug', 
-        'title', 
-        'thumbnail',
-        'thumbnail_credits',
-        'type',
-        'resume', 
-        'body', 
-        'is_exclusive',
-    ]
+    form_class = WriteForm
+    
     def get(self, request, *args, **kwargs):
         if not request.user.is_writer:
             raise Http404("Página não existe!")

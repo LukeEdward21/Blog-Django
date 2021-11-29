@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-
+          
           <div class="blog-post">
             <h2 class="blog-post-title">{{article.title}}</h2>
             <p class="blog-post-meta">Criado em {{article.created}} por {{article.author}}</p>
@@ -19,6 +19,9 @@
             {% endif %}
 
             <p><em>{{article.resume}}</em></p>
+            {% if user.is_writer %}
+              <a href="{% url 'articles:edit' article.id %}">Editar</a>
+            {% endif %}
             <hr>
             {% if user.is_authenticated %}
             <p>
