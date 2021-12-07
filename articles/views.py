@@ -61,5 +61,6 @@ class UpdateArticleView(UpdateView):
     def get(self, request, *args, **kwargs):
         if not request.user.is_writer:
             raise Http404("Página não existe!")
+        
         return super(UpdateArticleView, self).get(request, *args, **kwargs)
     

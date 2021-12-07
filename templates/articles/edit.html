@@ -6,6 +6,7 @@
 
 {% block content %}
     {% if user.is_writer %}
+    {% if article.author.id == user.id %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
@@ -19,7 +20,10 @@
             var slug_normalized = slug_spaceless.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             slug.value = slug_normalized.toLowerCase()
         }
-    </script>        
+    </script>
+    {% else %}
+    <p>Você não tem permissão para editar este artigo.</p>
+    {% endif %}       
     {% endif %}
     
 {% endblock %}

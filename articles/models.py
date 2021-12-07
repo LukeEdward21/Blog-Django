@@ -44,7 +44,7 @@ class Article(models.Model):
     updated = models.DateTimeField('Atualizado', auto_now=True)
     # added fields
     is_exclusive = models.BooleanField('Exclusivo', default=False)
-
+    
     class Meta:
         ordering = ("-created",)
     

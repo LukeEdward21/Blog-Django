@@ -13,14 +13,14 @@
           
           <div class="blog-post">
             <h2 class="blog-post-title">{{article.title}}</h2>
-            <p class="blog-post-meta">Criado em {{article.created}} por {{article.author}}</p>
-            {% if article.created != article.updated %}
-              <p class="blog-post-meta">Atualizado em {{article.updated}} por {{article.author}}</p>
-            {% endif %}
+            <p class="blog-post-meta">Criado por {{article.author}}</p>
+            <p class="blog-post-meta">Atualizado: {{article.updated}}</p>
 
             <p><em>{{article.resume}}</em></p>
             {% if user.is_writer %}
+            {% if article.author.id == user.id %}
               <a href="{% url 'articles:edit' article.id %}">Editar</a>
+              {% endif %}  
             {% endif %}
             <hr>
             {% if user.is_authenticated %}
