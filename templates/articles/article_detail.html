@@ -20,6 +20,7 @@
             {% if user.is_writer %}
             {% if article.author.id == user.id %}
               <a href="{% url 'articles:edit' article.id %}">Editar</a>
+              - <a href="{% url 'articles:delete' article.id %}">Excluir</a>
               {% endif %}  
             {% endif %}
             <hr>

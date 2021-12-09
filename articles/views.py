@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
+from django.views.generic.edit import DeleteView
 
 from .forms import WriteForm
 from .models import Article
@@ -63,4 +64,21 @@ class UpdateArticleView(UpdateView):
             raise Http404("Página não existe!")
         
         return super(UpdateArticleView, self).get(request, *args, **kwargs)
+
+
+@method_decorator(login_required, name='dispatch')
+class DeleteArticlesView(DeleteView):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DeleteArticlesView, self).dispatch(*args, **kwargs)
+    
+    model = Article
+    template_name = 'articles/delete.html'
+    success_url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_writer:
+            raise Http404("Página não existe!")
+        
+        return super(DeleteArticlesView, self).get(request, *args, **kwargs)
     

@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block title %}Editar artigo{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if user.is_writer %}
+    {% if article.author.id == user.id %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Confirmar</button>
+    </form>
+    {% else %}
+    <p>Você não tem permissão para excluir este artigo.</p>
+    {% endif %}       
+    {% endif %}
+    
+{% endblock %}
