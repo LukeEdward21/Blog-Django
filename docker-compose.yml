@@ -10,6 +10,9 @@ services:
       - 8000:8000
     depends_on:
       - db
+    networks:
+      - blog-django
+
   db:
     # image: postgres:latest
     image: postgres:13
@@ -18,9 +21,26 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - blog-django
+    # ports:
+    # - 5432:5432
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin4"
     ports:
-      - 5432:5432
+      - 15432:80
+    depends_on:
+      - db
+    networks:
+      - blog-django
     
-
 volumes:
   postgres_data:
+
+networks:
+  blog-django:
+    driver: bridge

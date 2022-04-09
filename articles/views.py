@@ -34,6 +34,7 @@ class ArticleCreateView(CreateView):
             return super(ArticleCreateView, self)
         
     
+    # if user not writer attempts access write page 
     def get(self, request, *args, **kwargs):
         if not request.user.is_writer:
             raise Http404("Página não existe!")

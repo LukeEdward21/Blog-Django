@@ -33,6 +33,9 @@ class SimpleSignupForm(SignupForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
 
+        # user.username = self.cleaned_data['username']
+        # user.username = user.username.lower()
+
         user.birth_date = self.cleaned_data['birth_date']
         user.gender = self.cleaned_data['gender']
         # user.is_active = False

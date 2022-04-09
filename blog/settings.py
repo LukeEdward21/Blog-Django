@@ -166,5 +166,7 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # custom this to your project
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
 # crispy-forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"

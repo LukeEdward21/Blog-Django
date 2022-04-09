@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # local urls
     path('', include('articles.urls', namespace='articles')),
+    path('', include('users.urls', namespace='users')),
     # 3rd urls
     path('accounts/', include('allauth.urls')),
 ]
