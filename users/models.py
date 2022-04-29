@@ -2,8 +2,11 @@
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
 from uuid import uuid4
+from random import randint
 import os
+
 
 
 def path_and_rename(instance, filename):
@@ -22,17 +25,17 @@ class User(AbstractUser):
         ('F', 'Feminino',),
         ('M', 'Masculino',),
     )
-
+    alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
     first_name = models.CharField('Nome', max_length=150)
     last_name = models.CharField('Sobrenome', max_length=150)
     email = models.EmailField('E-mail', unique=True, max_length=150)
-    username = models.CharField('Nome de usuário', unique=True, max_length=150)
+    username = models.CharField('Nome de usuário', unique=True, max_length=150, validators=[alphanumeric])
 
-    # slug = models.SlugField('Slug', unique=True, max_length=150)
+    slug = models.SlugField('Slug', unique=True, max_length=150)
 
 
-    birth_date = models.DateField('Data de nascimento', auto_now_add=True)
+    birth_date = models.DateField('Data de nascimento', blank=True)
     gender = models.CharField(
         'Gênero',
         max_length=1,
@@ -42,8 +45,6 @@ class User(AbstractUser):
 
     is_writer = models.BooleanField('Escritor', default=False)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'birth_date', 'gender']
-
-
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'birth_date', 'gender', 'slug']
 
 

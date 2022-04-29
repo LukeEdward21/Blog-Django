@@ -1,6 +1,7 @@
 from django import forms as fields_forms
 from allauth.account.forms import SignupForm, LoginForm
 from django.contrib.auth import forms
+from random import randint
 
 from .models import User
 
@@ -32,6 +33,9 @@ class SimpleSignupForm(SignupForm):
         user = super(SimpleSignupForm, self).save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+        user.username = self.cleaned_data['username']
+
+        user.slug = user.username + '-' + str(randint(100000000, 999999999))
 
         # user.username = self.cleaned_data['username']
         # user.username = user.username.lower()

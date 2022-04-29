@@ -20,7 +20,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_blog_data:/var/lib/postgresql/data/
     networks:
       - blog-django
     # ports:
@@ -39,7 +39,7 @@ services:
       - blog-django
     
 volumes:
-  postgres_data:
+  postgres_blog_data:
 
 networks:
   blog-django:

@@ -7,5 +7,5 @@ app_name = 'users'
 
 urlpatterns = [
     # path("users/edit-profile", views.ArticleFormView.as_view(), name="write"),
-    path('users/<int:pk>', UserDetailView.as_view(), name="user-profile"),
+    path('users/<slug:slug>', UserDetailView.as_view(), name="user-profile"),
 ]
